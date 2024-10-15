@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CB900F222CBE4CCB007DE98A /* SwiftyPing in Frameworks */ = {isa = PBXBuildFile; productRef = CB900F212CBE4CCB007DE98A /* SwiftyPing */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CB900F0F2CBE4AA9007DE98A /* Ping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB900F222CBE4CCB007DE98A /* SwiftyPing in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = Ping;
 			packageProductDependencies = (
+				CB900F212CBE4CCB007DE98A /* SwiftyPing */,
 			);
 			productName = Ping;
 			productReference = CB900F0F2CBE4AA9007DE98A /* Ping.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = CB900F062CBE4AA9007DE98A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CB900F202CBE4CCB007DE98A /* XCRemoteSwiftPackageReference "SwiftyPing" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CB900F102CBE4AA9007DE98A /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CB900F202CBE4CCB007DE98A /* XCRemoteSwiftPackageReference "SwiftyPing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/samiyr/SwiftyPing.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CB900F212CBE4CCB007DE98A /* SwiftyPing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB900F202CBE4CCB007DE98A /* XCRemoteSwiftPackageReference "SwiftyPing" */;
+			productName = SwiftyPing;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB900F072CBE4AA9007DE98A /* Project object */;
 }
