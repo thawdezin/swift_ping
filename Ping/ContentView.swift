@@ -65,9 +65,9 @@ struct ContentView: View {
                 
                 let result = """
                 \(timeString) | \(response.byteCount ?? 64) bytes from \(response.ipAddress ?? "unknown"): \
-                icmp_seq=\(response.sequenceNumber) ttl=\(response.byteCount ?? 0) time=\(duration) ms
+                icmp_seq=\(response.sequenceNumber) byteCount=\(response.byteCount ?? 0) time=\(duration) ms
                 """
-
+                // byteCount zero ဖြစ်နေရင် လိုင်းမရတော့လို့
                 DispatchQueue.main.async {
                     pingResults.append(result)
                 }
