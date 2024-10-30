@@ -57,7 +57,7 @@ struct ContentView: View {
         do {
             // Configure and start ping to chat.openai.com
             let configuration = PingConfiguration(interval: 0.5, with: 5)
-            pinger = try SwiftyPing(host: "chat.openai.com", configuration: configuration, queue: .global())
+            pinger = try SwiftyPing(host: "google.com", configuration: configuration, queue: .global())
 
             pinger?.observer = { response in
                 let timeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
