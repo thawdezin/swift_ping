@@ -25,15 +25,17 @@ struct ContentView: View {
                         ForEach(pingResults, id: \.self) { result in
                             Text(result)
                                 .padding(5)
-                                .background(Color.gray.opacity(0.1))
+                                .background(result.contains("No internet") ? Color.red.opacity(0.1) : Color.gray.opacity(0.1))
                                 .cornerRadius(5)
                                 .padding(.horizontal)
+                                .foregroundColor(result.contains("No internet") ? .red : .green)
+                                .id(result) // Assign unique ID to each result for ScrollViewReader
                         }
                     }
                     .onChange(of: pingResults) { _ in
                         // Auto-scroll to the bottom whenever a new ping is added
-                        if let lastID = pingResults.last {
-                            proxy.scrollTo(lastID, anchor: .bottom)
+                        if let lastResult = pingResults.last {
+                            proxy.scrollTo(lastResult, anchor: .bottom)
                         }
                     }
                 }
@@ -55,19 +57,24 @@ struct ContentView: View {
     
     func startPing() {
         do {
-            // Configure and start ping to chat.openai.com
+            // Configure and start ping to google.com
             let configuration = PingConfiguration(interval: 0.5, with: 5)
             pinger = try SwiftyPing(host: "google.com", configuration: configuration, queue: .global())
 
             pinger?.observer = { response in
                 let timeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
                 let duration = String(format: "%.3f", response.duration * 1000)  // Convert to ms
+
+                var result: String
+                if let byteCount = response.byteCount, byteCount > 0 {
+                    result = """
+                    \(timeString) | \(byteCount) bytes from \(response.ipAddress ?? "unknown"): \
+                    icmp_seq=\(response.sequenceNumber) byteCount=\(byteCount) time=\(duration) ms
+                    """
+                } else {
+                    result = "No internet connection."
+                }
                 
-                let result = """
-                \(timeString) | \(response.byteCount ?? 64) bytes from \(response.ipAddress ?? "unknown"): \
-                icmp_seq=\(response.sequenceNumber) byteCount=\(response.byteCount ?? 0) time=\(duration) ms
-                """
-                // byteCount zero ဖြစ်နေရင် လိုင်းမရတော့လို့
                 DispatchQueue.main.async {
                     pingResults.append(result)
                 }
